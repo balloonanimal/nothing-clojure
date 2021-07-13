@@ -5,22 +5,22 @@
 ;; basic fns
 (def identity (lambda [x] x))
 (def constantly (lambda [x] (lambda [_] x)))
-(def comp (lambda [f] (lambda [g] (lambda [x] (g (f x))))))
+;; (def comp (lambda [f] (lambda [g] (lambda [x] (g (f x))))))
 
 ;; booleans
-(def tru (lambda [t] (lambda [f] t)))
+(def tru  (lambda [t] (lambda [f] t)))
 (def fals (lambda [t] (lambda [f] f)))
 
 ;; pairs
-(def pair (lambda [x] (lambda [y] (lambda [z] ((z x) y)))))
-(def left (lambda [p] (p (lambda [x] (lambda [y] x)))))
+(def pair  (lambda [x] (lambda [y] (lambda [z] ((z x) y)))))
+(def left  (lambda [p] (p (lambda [x] (lambda [y] x)))))
 (def right (lambda [p] (p (lambda [x] (lambda [y] y)))))
 
 ;; church numerals
 ;;; by hand
-(def zero (lambda [f] (lambda [x] x)))
-(def one (lambda [f] (lambda [x] (f x))))
-(def two (lambda [f] (lambda [x] (f (f x)))))
+(def zero  (lambda [f] (lambda [x] x)))
+(def one   (lambda [f] (lambda [x] (f x))))
+(def two   (lambda [f] (lambda [x] (f (f x)))))
 (def three (lambda [f] (lambda [x] (f (f (f x))))))
 
 ;;; by successor
