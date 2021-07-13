@@ -51,11 +51,19 @@
 (def zero? (fn [n] (n (constantly fals) tru)))
 (def <=    (fn [n m] (zero? (- n m))))
 
+;; (Z f) = (x x)
+;;         where x = (fn [y] (f (fn [& args] (apply (y y) args))))
+;;         substituting the first x
+;;       = ((fn [y] (f (fn [& args] (apply (y y) args)))) x)
+;;         replacing y with x (function application)
+;;       = (f (fn [& args] (apply (x x) args)))
+;;         recall that (Z f) = (x x)
+;;       = (f (fn [& args] (apply (Z f) args)))
+;; abstractly (Z f) = (f (Z f))
 (def Z (fn [f]
          ((fn [x] (x x))
-          (fn [x]
-            (f (fn [& args]
-                 (apply (x x) args)))))))
+          (fn [y] (f (fn [& args]
+                       (apply (y y) args)))))))
 
 (def mod
   (Z (fn [f]
